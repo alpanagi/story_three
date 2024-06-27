@@ -4,7 +4,7 @@ use bevy_rapier3d::prelude::*;
 use crate::level::Tile;
 
 #[derive(Component)]
-struct HoverIndicator;
+pub struct HoverIndicator;
 
 pub struct HoverIndicatorPlugin;
 impl Plugin for HoverIndicatorPlugin {
