@@ -3,6 +3,9 @@ use bevy_rapier3d::prelude::*;
 
 use crate::game_state::GameState;
 
+#[derive(Component)]
+pub struct Tile;
+
 #[derive(Resource)]
 struct Map {
     image: Option<Handle<Image>>,
@@ -47,6 +50,7 @@ fn spawn_map(
                             ..Default::default()
                         },
                         Collider::cuboid(0.8, 0.05, 0.8),
+                        Tile,
                     ));
                 }
             }

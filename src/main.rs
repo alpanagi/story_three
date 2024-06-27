@@ -1,6 +1,7 @@
 mod environment;
 mod game_camera;
 mod game_state;
+mod hover_indicator;
 mod instructions_screen;
 mod level;
 mod player;
@@ -10,6 +11,7 @@ use bevy::{asset::AssetMetaCheck, prelude::*};
 use bevy_rapier3d::plugin::{NoUserData, RapierPhysicsPlugin};
 use environment::EnvironmentPlugin;
 use game_camera::GameCameraPlugin;
+use hover_indicator::HoverIndicatorPlugin;
 use instructions_screen::InstructionsScreenPlugin;
 use level::LevelPlugin;
 use player::PlayerPlugin;
@@ -22,8 +24,9 @@ fn main() {
         .add_plugins(RapierPhysicsPlugin::<NoUserData>::default())
         .add_plugins((
             EnvironmentPlugin,
-            GameCameraPlugin,
             LevelPlugin,
+            HoverIndicatorPlugin,
+            GameCameraPlugin,
             PlayerPlugin,
             InstructionsScreenPlugin,
             SuccessScreenPlugin,

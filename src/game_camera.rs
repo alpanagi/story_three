@@ -28,7 +28,6 @@ fn setup(mut commands: Commands) {
                     far: 10000.,
                     ..Default::default()
                 }),
-                tonemapping: Tonemapping::None,
                 ..Default::default()
             });
         });
