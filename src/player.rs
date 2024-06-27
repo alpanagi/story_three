@@ -1,6 +1,6 @@
-use bevy::prelude::*;
-
+use crate::translation_tween::TranslationTween;
 use crate::{game_state::GameState, hover_indicator::HoverIndicator};
+use bevy::prelude::*;
 
 #[derive(Component)]
 struct Player;
@@ -26,16 +26,19 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
 }
 
 fn movement(
-    mut player_query: Query<&mut Transform, With<Player>>,
+    mut commands: Commands,
+    mut player_query: Query<Entity, With<Player>>,
     indicator_query: Query<(&Visibility, &Transform), (With<HoverIndicator>, Without<Player>)>,
     mouse: Res<ButtonInput<MouseButton>>,
 ) {
     if mouse.just_pressed(MouseButton::Left) {
-        let mut player_tran = player_query.single_mut();
+        let player_entity = player_query.single_mut();
         let (indicator_vis, indicator_tran) = indicator_query.single();
 
         if indicator_vis == Visibility::Visible {
-            player_tran.translation = indicator_tran.translation;
+            commands.entity(player_entity).insert(TranslationTween {
+                target: indicator_tran.translation,
+            });
         }
     }
 }

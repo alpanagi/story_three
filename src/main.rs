@@ -6,7 +6,9 @@ mod instructions_screen;
 mod level;
 mod player;
 mod success_screen;
+mod translation_tween;
 
+use crate::translation_tween::TranslationTweenPlugin;
 use bevy::{asset::AssetMetaCheck, prelude::*};
 use bevy_rapier3d::plugin::{NoUserData, RapierPhysicsPlugin};
 use environment::EnvironmentPlugin;
@@ -30,6 +32,7 @@ fn main() {
             PlayerPlugin,
             InstructionsScreenPlugin,
             SuccessScreenPlugin,
+            TranslationTweenPlugin,
         ))
         .add_systems(Startup, setup)
         .run();
