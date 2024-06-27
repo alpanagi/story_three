@@ -8,12 +8,12 @@
 ## Mechanics to support story
 
 - Use left click to move. Movement happens in tiles.
-- Use right click on a tile to interact with a tile.
+- Use right click on a tile to interact with it.
 
 ## Constraints
 
 - You should only be able to walk on steppable tiles.
-- You should only be able to interact with tile at a center distance around you.
+- You should only be able to interact with tiles at a certain distance around you.
 
 ## Win condition
 
