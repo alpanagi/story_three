@@ -19,7 +19,7 @@ impl Plugin for LevelPlugin {
 
 fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.insert_resource(Map {
-        image: Some(asset_server.load("map.png")),
+        image: Some(asset_server.load("textures/map.png")),
     });
 }
 
@@ -27,15 +27,8 @@ fn spawn_map(
     mut commands: Commands,
     images: Res<Assets<Image>>,
     mut map: ResMut<Map>,
-    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<StandardMaterial>>,
+    asset_server: Res<AssetServer>,
 ) {
-    let material = materials.add(StandardMaterial {
-        unlit: true,
-        base_color: Color::WHITE,
-        ..Default::default()
-    });
-
     if map.image.is_some() {
         let image = images.get(map.image.clone().unwrap()).unwrap();
         for i in 0..image.width() {
@@ -44,17 +37,16 @@ fn spawn_map(
                 let pixel = image.get_pixel(i, j);
                 if pixel.0[0] == 0 && pixel.0[1] == 0 && pixel.0[2] == 0 {
                     commands.spawn((
-                        PbrBundle {
-                            mesh: meshes.add(Plane3d::default().mesh().size(0.95, 0.95)),
-                            material: material.clone(),
+                        SceneBundle {
+                            scene: asset_server.load("meshes/tile.glb#Scene0"),
                             transform: Transform::from_xyz(
-                                0.5 + i as f32 - image.width() as f32 / 2.,
-                                0.,
-                                0.5 + j as f32 - image.height() as f32 / 2.,
+                                1.7 * i as f32 - 1.7 * image.width() as f32 / 2.,
+                                -0.05,
+                                1.7 * j as f32 - 1.7 * image.height() as f32 / 2.,
                             ),
                             ..Default::default()
                         },
-                        Collider::cuboid(0.95, 0.5, 0.95),
+                        Collider::cuboid(0.8, 0.05, 0.8),
                     ));
                 }
             }

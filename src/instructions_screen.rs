@@ -2,6 +2,8 @@ use bevy::prelude::*;
 
 use crate::game_state::GameState;
 
+const FONT: &str = "fonts/PixelifySans-Medium.ttf";
+
 #[derive(Component)]
 struct InstructionsScreenComponent;
 
@@ -22,7 +24,7 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     let mut press_any_key_text = TextBundle::from_section(
         "PRESS ANY KEY",
         TextStyle {
-            font: asset_server.load("PixelifySans-Medium.ttf"),
+            font: asset_server.load(FONT),
             font_size: 32.0,
             ..default()
         },
@@ -50,7 +52,7 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
             parent.spawn(TextBundle::from_section(
                 "MOVE WITH",
                 TextStyle {
-                    font: asset_server.load("PixelifySans-Medium.ttf"),
+                    font: asset_server.load(FONT),
                     font_size: 32.0,
                     ..default()
                 },
@@ -66,7 +68,7 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                     background_color: Color::WHITE.into(),
                     ..default()
                 },
-                UiImage::new(asset_server.load("instructions.png")),
+                UiImage::new(asset_server.load("textures/instructions.png")),
             ));
 
             parent.spawn((press_any_key_text, PressAnyKeyText));

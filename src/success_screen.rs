@@ -2,6 +2,8 @@ use bevy::prelude::*;
 
 use crate::game_state::GameState;
 
+const FONT: &str = "fonts/PixelifySans-Medium.ttf";
+
 pub struct SuccessScreenPlugin;
 impl Plugin for SuccessScreenPlugin {
     fn build(&self, app: &mut App) {
@@ -27,7 +29,7 @@ fn show_screen(mut commands: Commands, asset_server: Res<AssetServer>) {
             parent.spawn(TextBundle::from_section(
                 "SUCCESS!",
                 TextStyle {
-                    font: asset_server.load("PixelifySans-Medium.ttf"),
+                    font: asset_server.load(FONT),
                     font_size: 32.0,
                     ..default()
                 },
@@ -36,7 +38,7 @@ fn show_screen(mut commands: Commands, asset_server: Res<AssetServer>) {
             parent.spawn(TextBundle::from_section(
                 "SUCCESS!",
                 TextStyle {
-                    font: asset_server.load("PixelifySans-Medium.ttf"),
+                    font: asset_server.load(FONT),
                     font_size: 32.0,
                     ..default()
                 },
@@ -45,7 +47,7 @@ fn show_screen(mut commands: Commands, asset_server: Res<AssetServer>) {
             parent.spawn(TextBundle::from_section(
                 "SUCCESS!",
                 TextStyle {
-                    font: asset_server.load("PixelifySans-Medium.ttf"),
+                    font: asset_server.load(FONT),
                     font_size: 32.0,
                     ..default()
                 },
