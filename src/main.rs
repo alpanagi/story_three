@@ -1,3 +1,4 @@
+mod a_star;
 mod environment;
 mod game_camera;
 mod game_state;

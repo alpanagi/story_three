@@ -18,6 +18,7 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn((
         SceneBundle {
             scene: asset_server.load("meshes/hover_indicator.glb#Scene0"),
+            visibility: Visibility::Hidden,
             ..Default::default()
         },
         HoverIndicator,

@@ -1,4 +1,4 @@
-use bevy::{core_pipeline::tonemapping::Tonemapping, prelude::*};
+use bevy::prelude::*;
 
 pub struct GameCameraPlugin;
 impl Plugin for GameCameraPlugin {

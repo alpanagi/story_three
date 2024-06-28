@@ -1,3 +1,5 @@
+use crate::a_star::AStar;
+use crate::level::Tile;
 use crate::translation_tween::TranslationTween;
 use crate::{game_state::GameState, hover_indicator::HoverIndicator};
 use bevy::prelude::*;
@@ -27,18 +29,21 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
 
 fn movement(
     mut commands: Commands,
-    mut player_query: Query<Entity, With<Player>>,
+    mut player_query: Query<(Entity, &Transform), With<Player>>,
     indicator_query: Query<(&Visibility, &Transform), (With<HoverIndicator>, Without<Player>)>,
+    tiles_query: Query<&Transform, With<Tile>>,
     mouse: Res<ButtonInput<MouseButton>>,
 ) {
     if mouse.just_pressed(MouseButton::Left) {
-        let player_entity = player_query.single_mut();
+        let (player_entity, player_tran) = player_query.single_mut();
         let (indicator_vis, indicator_tran) = indicator_query.single();
 
         if indicator_vis == Visibility::Visible {
-            commands.entity(player_entity).insert(TranslationTween {
-                target: indicator_tran.translation,
-            });
+            let tiles = tiles_query.iter().map(|x| x.translation).collect();
+            let a_star = AStar::new(tiles);
+            commands.entity(player_entity).insert(TranslationTween::new(
+                a_star.path(player_tran.translation, indicator_tran.translation),
+            ));
         }
     }
 }
