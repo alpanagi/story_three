@@ -26,12 +26,14 @@ impl AStarNode {
 
     fn successors(&self) -> Vec<(AStarNode, u32)> {
         let mut successors = vec![];
-        for j in -1..1 {
-            for i in -1..1 {
+        for j in -1..2 {
+            for i in -1..2 {
                 if i == 0 && j == 0 {
                     continue;
                 }
 
+                let i = i * 170;
+                let j = j * 170;
                 if self.tiles.contains(&(self.position + IVec3::new(i, 0, j))) {
                     successors.push(AStarNode {
                         position: self.position + IVec3::new(i, 0, j),
@@ -68,10 +70,9 @@ impl AStar {
             |p| p.distance(&target),
             |p| *p == target,
         );
-        println!("{:?}", path);
         path.map(|x| {
             x.0.iter()
-                .map(|x| x.position.as_vec3())
+                .map(|x| x.position.as_vec3() / 100.)
                 .collect::<Vec<Vec3>>()
         })
     }
@@ -79,8 +80,8 @@ impl AStar {
 
 fn to_ivec3(val: &Vec3) -> IVec3 {
     IVec3::new(
-        (1000. * val.x.round()) as i32,
-        (1000. * val.y.round()) as i32,
-        (1000. * val.z.round()) as i32,
+        (100. * val.x).round() as i32,
+        0,
+        (100. * val.z).round() as i32,
     )
 }

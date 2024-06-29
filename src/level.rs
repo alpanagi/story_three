@@ -44,12 +44,12 @@ fn spawn_map(
                             scene: asset_server.load("meshes/tile.glb#Scene0"),
                             transform: Transform::from_xyz(
                                 1.7 * i as f32 - 1.7 * image.width() as f32 / 2.,
-                                -0.05,
+                                0.,
                                 1.7 * j as f32 - 1.7 * image.height() as f32 / 2.,
                             ),
                             ..Default::default()
                         },
-                        Collider::cuboid(0.8, 0.05, 0.8),
+                        Collider::cuboid(0.8, 0.001, 0.8),
                         Tile,
                     ));
                 }
