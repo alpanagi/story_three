@@ -21,32 +21,36 @@ impl AStarNode {
     }
 
     fn distance(&self, other: &AStarNode) -> u32 {
-        self.position.distance_squared(other.position) as u32
+        self.position.as_vec3().distance(other.position.as_vec3()) as u32
     }
 
     fn successors(&self) -> Vec<(AStarNode, u32)> {
         let mut successors = vec![];
-        for j in -1..2 {
-            for i in -1..2 {
-                if i == 0 && j == 0 {
-                    continue;
-                }
+        let offsets = vec![
+            (IVec3::new(-1, 0, -1), 141),
+            (IVec3::new(-1, 0, 0), 100),
+            (IVec3::new(-1, 0, 1), 141),
+            (IVec3::new(0, 0, -1), 100),
+            (IVec3::new(0, 0, 1), 100),
+            (IVec3::new(1, 0, -1), 141),
+            (IVec3::new(1, 0, 0), 100),
+            (IVec3::new(1, 0, 1), 141),
+        ];
 
-                let i = i * 170;
-                let j = j * 170;
-                if self.tiles.contains(&(self.position + IVec3::new(i, 0, j))) {
-                    successors.push(AStarNode {
-                        position: self.position + IVec3::new(i, 0, j),
+        for (offset, dist) in offsets {
+            let tile = self.position + offset * 170;
+            if self.tiles.contains(&tile) {
+                successors.push((
+                    AStarNode {
+                        position: tile,
                         tiles: self.tiles.clone(),
-                    });
-                }
+                    },
+                    dist,
+                ));
             }
         }
 
         successors
-            .into_iter()
-            .map(|p| (p.clone(), p.distance(self)))
-            .collect()
     }
 }
 
