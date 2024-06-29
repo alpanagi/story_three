@@ -38,7 +38,7 @@ fn spawn_map(
             for j in 0..image.height() {
                 let image = image.clone().try_into_dynamic().unwrap().to_rgba8();
                 let pixel = image.get_pixel(i, j);
-                if pixel.0[0] == 0 && pixel.0[1] == 0 && pixel.0[2] == 0 {
+                if pixel.0[0] == 255 && pixel.0[1] == 255 && pixel.0[2] == 255 {
                     commands.spawn((
                         SceneBundle {
                             scene: asset_server.load("meshes/tile.glb#Scene0"),

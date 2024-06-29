@@ -32,18 +32,20 @@ fn tick(
             continue;
         }
 
-        if tran.translation.distance(tween.path[tween.idx + 1]) < 0.1 {
+        let delta = (tween.path[tween.idx + 1] - tran.translation).normalize()
+            * MOVEMENT_SPEED
+            * time.delta_seconds();
+
+        if tran.translation.distance(tween.path[tween.idx + 1]) < delta.length() {
             if tween.idx == tween.path.len() - 2 {
                 tran.translation = tween.path[tween.path.len() - 1];
                 commands.entity(entity).remove::<TranslationTween>();
+                continue;
             } else {
                 tween.idx += 1;
             }
-        } else {
-            tran.translation = tran.translation
-                + (tween.path[tween.idx + 1] - tween.path[tween.idx]).normalize()
-                    * MOVEMENT_SPEED
-                    * time.delta_seconds();
         }
+
+        tran.translation += delta;
     }
 }
