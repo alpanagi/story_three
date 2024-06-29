@@ -1,8 +1,9 @@
+use bevy::prelude::*;
+
+use crate::{game_state::GameState, hover_indicator::HoverIndicator};
 use crate::a_star::AStar;
 use crate::level::Tile;
 use crate::translation_tween::TranslationTween;
-use crate::{game_state::GameState, hover_indicator::HoverIndicator};
-use bevy::prelude::*;
 
 #[derive(Component)]
 struct Player;
@@ -41,9 +42,11 @@ fn movement(
         if indicator_vis == Visibility::Visible {
             let tiles = tiles_query.iter().map(|x| x.translation).collect();
             let a_star = AStar::new(tiles);
-            commands.entity(player_entity).insert(TranslationTween::new(
-                a_star.path(player_tran.translation, indicator_tran.translation),
-            ));
+            if let Some(path) = a_star.path(player_tran.translation, indicator_tran.translation) {
+                commands
+                    .entity(player_entity)
+                    .insert(TranslationTween::new(path));
+            }
         }
     }
 }
