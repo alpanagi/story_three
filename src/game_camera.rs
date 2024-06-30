@@ -11,7 +11,7 @@ fn setup(mut commands: Commands) {
     commands
         .spawn(TransformBundle {
             local: Transform::from_rotation(Quat::from_rotation_y(-45_f32.to_radians()))
-                .with_translation(Vec3::new(-0.8, 0., 0.8)),
+                .with_translation(Vec3::new(-1.7 - 0.8, 0., 0.)),
             ..Default::default()
         })
         .with_children(|parent| {

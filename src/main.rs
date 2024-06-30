@@ -11,6 +11,7 @@ mod translation_tween;
 
 use crate::translation_tween::TranslationTweenPlugin;
 use bevy::{asset::AssetMetaCheck, prelude::*};
+use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_rapier3d::plugin::{NoUserData, RapierPhysicsPlugin};
 use environment::EnvironmentPlugin;
 use game_camera::GameCameraPlugin;
@@ -24,6 +25,7 @@ fn main() {
     App::new()
         .insert_resource(AssetMetaCheck::Never)
         .add_plugins(DefaultPlugins.set(ImagePlugin::default_nearest()))
+        .add_plugins(WorldInspectorPlugin::new())
         .add_plugins(RapierPhysicsPlugin::<NoUserData>::default())
         .add_plugins((
             EnvironmentPlugin,

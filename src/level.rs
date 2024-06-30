@@ -51,7 +51,7 @@ fn spawn_map(
                             transform: Transform::from_translation(position),
                             ..Default::default()
                         },
-                        Collider::cuboid(0.8, 0.001, 0.8),
+                        Collider::cuboid(0.85, 0.001, 0.85),
                         Tile,
                     ));
                 } else if pixel.0[0] == 255 && pixel.0[1] == 0 && pixel.0[2] == 0 {
