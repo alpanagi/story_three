@@ -26,20 +26,40 @@ impl AStarNode {
 
     fn successors(&self) -> Vec<(AStarNode, u32)> {
         let mut successors = vec![];
-        let offsets = vec![
-            (IVec3::new(-1, 0, -1), 141),
+        let straight_offsets = vec![
             (IVec3::new(-1, 0, 0), 100),
-            (IVec3::new(-1, 0, 1), 141),
             (IVec3::new(0, 0, -1), 100),
             (IVec3::new(0, 0, 1), 100),
-            (IVec3::new(1, 0, -1), 141),
             (IVec3::new(1, 0, 0), 100),
+        ];
+        let diagonal_offsets = vec![
+            (IVec3::new(-1, 0, -1), 141),
+            (IVec3::new(-1, 0, 1), 141),
+            (IVec3::new(1, 0, -1), 141),
             (IVec3::new(1, 0, 1), 141),
         ];
 
-        for (offset, dist) in offsets {
+        for (offset, dist) in straight_offsets {
             let tile = self.position + offset * 170;
             if self.tiles.contains(&tile) {
+                successors.push((
+                    AStarNode {
+                        position: tile,
+                        tiles: self.tiles.clone(),
+                    },
+                    dist,
+                ));
+            }
+        }
+
+        for (offset, dist) in diagonal_offsets {
+            let tile = self.position + offset * 170;
+            let wall_obstacle_a = self.position + IVec3::new(offset.x, 0, 0) * 170;
+            let wall_obstacle_b = self.position + IVec3::new(0, 0, offset.z) * 170;
+            if self.tiles.contains(&tile)
+                && self.tiles.contains(&wall_obstacle_a)
+                && self.tiles.contains(&wall_obstacle_b)
+            {
                 successors.push((
                     AStarNode {
                         position: tile,
