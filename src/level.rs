@@ -38,19 +38,30 @@ fn spawn_map(
             for j in 0..image.height() {
                 let image = image.clone().try_into_dynamic().unwrap().to_rgba8();
                 let pixel = image.get_pixel(i, j);
+                let position = Vec3::new(
+                    1.7 * i as f32 - 1.7 * image.width() as f32 / 2.,
+                    0.,
+                    1.7 * j as f32 - 1.7 * image.height() as f32 / 2.,
+                );
+
                 if pixel.0[0] == 255 && pixel.0[1] == 255 && pixel.0[2] == 255 {
                     commands.spawn((
                         SceneBundle {
                             scene: asset_server.load("meshes/tile.glb#Scene0"),
-                            transform: Transform::from_xyz(
-                                1.7 * i as f32 - 1.7 * image.width() as f32 / 2.,
-                                0.,
-                                1.7 * j as f32 - 1.7 * image.height() as f32 / 2.,
-                            ),
+                            transform: Transform::from_translation(position),
                             ..Default::default()
                         },
                         Collider::cuboid(0.8, 0.001, 0.8),
                         Tile,
+                    ));
+                } else if pixel.0[0] == 255 && pixel.0[1] == 0 && pixel.0[2] == 0 {
+                    commands.spawn((
+                        SceneBundle {
+                            scene: asset_server.load("meshes/wall.glb#Scene0"),
+                            transform: Transform::from_translation(position),
+                            ..Default::default()
+                        },
+                        Collider::cuboid(0.8, 0.8, 0.8),
                     ));
                 }
             }
