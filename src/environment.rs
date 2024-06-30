@@ -9,6 +9,10 @@ impl Plugin for EnvironmentPlugin {
 
 fn setup(mut commands: Commands) {
     commands.spawn(DirectionalLightBundle {
+        directional_light: DirectionalLight {
+            shadows_enabled: true,
+            ..Default::default()
+        },
         transform: Transform::from_rotation(Quat::from_euler(
             EulerRot::XYZ,
             -45_f32.to_radians(),
