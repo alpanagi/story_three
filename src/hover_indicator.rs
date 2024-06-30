@@ -41,7 +41,7 @@ fn hover(
         if let Some((entity, _)) = rapier_context.cast_ray(
             camera_ray.origin,
             *camera_ray.direction,
-            100.,
+            1000.,
             true,
             QueryFilter::default(),
         ) {

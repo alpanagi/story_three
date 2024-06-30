@@ -11,12 +11,12 @@ fn setup(mut commands: Commands) {
     commands
         .spawn(TransformBundle {
             local: Transform::from_rotation(Quat::from_rotation_y(-45_f32.to_radians()))
-                .with_translation(Vec3::new(-1.7 - 0.8, 0., 0.)),
+                .with_translation(Vec3::new(10.6, 0., 16.6)),
             ..Default::default()
         })
         .with_children(|parent| {
             parent.spawn(Camera3dBundle {
-                transform: Transform::from_xyz(0., 21., 21.)
+                transform: Transform::from_xyz(0., 40., 40.)
                     .with_rotation(Quat::from_rotation_x(-45_f32.to_radians())),
                 camera: Camera {
                     clear_color: ClearColorConfig::Custom(Color::hex("#172038").unwrap()),
