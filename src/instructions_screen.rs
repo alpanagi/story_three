@@ -66,8 +66,12 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         });
 }
 
-fn input(keys: Res<ButtonInput<KeyCode>>, mut next_state: ResMut<NextState<GameState>>) {
-    if keys.get_pressed().count() > 0 {
+fn input(
+    keys: Res<ButtonInput<KeyCode>>,
+    mouse: Res<ButtonInput<MouseButton>>,
+    mut next_state: ResMut<NextState<GameState>>,
+) {
+    if keys.get_pressed().count() > 0 || mouse.get_pressed().count() > 0 {
         next_state.set(GameState::Playing);
     }
 }
