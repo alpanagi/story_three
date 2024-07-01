@@ -1,4 +1,4 @@
-# story_three: levers and doors
+# story_three: point and click
 
 ![cover image](./art/cover_image.png)
 
@@ -7,10 +7,9 @@
 A basic game example.
 
 **This version adds:**
+
 - Mouse based movement
-- Interaction with world objects
 
 ### Controls
 
 Left mouse button: move
-Right mouse button: interact
