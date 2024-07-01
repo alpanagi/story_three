@@ -21,7 +21,7 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn((
         SceneBundle {
             scene: asset_server.load("meshes/player.glb#Scene0"),
-            transform: Transform::from_xyz(1.7, 0., 15. * 1.7),
+            transform: Transform::from_xyz(1.7, 0., 14. * 1.7),
             ..Default::default()
         },
         Player,
