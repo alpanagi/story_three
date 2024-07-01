@@ -49,20 +49,11 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
             InstructionsScreenComponent,
         ))
         .with_children(|parent| {
-            parent.spawn(TextBundle::from_section(
-                "MOVE WITH",
-                TextStyle {
-                    font: asset_server.load(FONT),
-                    font_size: 32.0,
-                    ..default()
-                },
-            ));
-
             parent.spawn((
                 NodeBundle {
                     style: Style {
-                        height: Val::Px(3. * 32.0),
-                        width: Val::Px(3. * 96.0),
+                        height: Val::Px(3. * 48.0),
+                        width: Val::Px(3. * 80.0),
                         ..default()
                     },
                     background_color: Color::WHITE.into(),
