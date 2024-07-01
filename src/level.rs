@@ -38,7 +38,7 @@ fn spawn_map(
             for j in 0..image.height() {
                 let image = image.clone().try_into_dynamic().unwrap().to_rgba8();
                 let pixel = image.get_pixel(i, j);
-                let position = Vec3::new(1.7 * i as f32, 0., 1.7 * j as f32);
+                let position = Vec3::new(0.85 + 1.7 * i as f32, 0., 0.85 + 1.7 * j as f32);
 
                 if pixel.0[0] == 255 && pixel.0[1] == 255 && pixel.0[2] == 255 {
                     commands.spawn((

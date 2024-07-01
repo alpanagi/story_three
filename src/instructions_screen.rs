@@ -43,7 +43,7 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                     row_gap: Val::Px(20.),
                     ..default()
                 },
-                background_color: BackgroundColor::from(Color::hex("#172038").unwrap()),
+                background_color: BackgroundColor::from(Color::BLACK),
                 ..default()
             },
             InstructionsScreenComponent,
