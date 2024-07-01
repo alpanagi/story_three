@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-    <body style="margin: 0px">
-        <script type="module">
-            import init from "./story_two.js";
-            init().catch((error) => {
-                if (
-                    !error.message.startsWith(
-                        "Using exceptions for control flow, don't mind me. This isn't actually an error!"
-                    )
-                ) {
-                    throw error;
-                }
-            });
-        </script>
-    </body>
+<body style="margin: 0">
+<script type="module">
+    import init from "./story_three.js";
+
+    init().catch((error) => {
+        if (
+            !error.message.startsWith("Using exceptions for control flow, don't mind me. This isn't actually an error!"
+            )
+        ) {
+            throw error;
+        }
+    });
+</script>
+</body>
 </html>

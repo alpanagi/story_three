@@ -6,10 +6,10 @@
 
 A basic game example.
 
-**This version adds:**
+**This version adds**
 
 - Mouse based movement
 
-### Controls
+**Controls**
 
 Left mouse button: move
