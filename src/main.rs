@@ -1,3 +1,15 @@
+use bevy::{asset::AssetMetaCheck, prelude::*};
+use bevy_rapier3d::plugin::{NoUserData, RapierPhysicsPlugin};
+
+use environment::EnvironmentPlugin;
+use game_camera::GameCameraPlugin;
+use hover_indicator::HoverIndicatorPlugin;
+use instructions_screen::InstructionsScreenPlugin;
+use level::LevelPlugin;
+use player::PlayerPlugin;
+use success_screen::SuccessScreenPlugin;
+use translation_tween::TranslationTweenPlugin;
+
 mod a_star;
 mod environment;
 mod game_camera;
@@ -9,17 +21,6 @@ mod player;
 mod success_screen;
 mod translation_tween;
 
-use crate::translation_tween::TranslationTweenPlugin;
-use bevy::{asset::AssetMetaCheck, prelude::*};
-use bevy_rapier3d::plugin::{NoUserData, RapierPhysicsPlugin};
-use environment::EnvironmentPlugin;
-use game_camera::GameCameraPlugin;
-use hover_indicator::HoverIndicatorPlugin;
-use instructions_screen::InstructionsScreenPlugin;
-use level::LevelPlugin;
-use player::PlayerPlugin;
-use success_screen::SuccessScreenPlugin;
-
 fn main() {
     App::new()
         .insert_resource(AssetMetaCheck::Never)
@@ -27,11 +28,11 @@ fn main() {
         .add_plugins(RapierPhysicsPlugin::<NoUserData>::default())
         .add_plugins((
             EnvironmentPlugin,
-            LevelPlugin,
-            HoverIndicatorPlugin,
             GameCameraPlugin,
-            PlayerPlugin,
+            HoverIndicatorPlugin,
             InstructionsScreenPlugin,
+            LevelPlugin,
+            PlayerPlugin,
             SuccessScreenPlugin,
             TranslationTweenPlugin,
         ))
@@ -41,6 +42,5 @@ fn main() {
 
 fn setup(mut window_query: Query<&mut Window>) {
     let mut window = window_query.single_mut();
-
     window.resolution.set(960., 540.);
 }

@@ -77,6 +77,7 @@ impl AStarNode {
 pub struct AStar {
     tiles: Rc<Vec<IVec3>>,
 }
+
 impl AStar {
     pub fn new(tiles: Vec<Vec3>) -> Self {
         let tiles: Vec<IVec3> = tiles.iter().map(|p| to_ivec3(p)).collect();
